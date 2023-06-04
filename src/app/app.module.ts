@@ -10,6 +10,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { PaginatorUsuarioComponent } from './components/paginator-usuario/paginator-usuario.component';
 import { PaginatorEstilosComponent } from './components/paginator-estilos/paginator-estilos.component';
 import { FormsModule } from '@angular/forms';
+import { FormComponent } from './components/usuarios/form/form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     PaginatorUsuarioComponent,
-    PaginatorEstilosComponent
+    PaginatorEstilosComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

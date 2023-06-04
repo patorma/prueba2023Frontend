@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Tipo } from '../components/tipo-musical/Tipo';
+import { TipoMusica } from '../components/tipo-musical/TipoMusica';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +19,19 @@ export class TiposService {
     return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
       //este map es de rxjs/operators
       map((response:any) =>{
-        (response.content as Tipo[]).map((tipo)=>{
-          tipo.tipo = tipo.tipo.toUpperCase()
+        (response.content as TipoMusica[]).map((tipo)=>{
+          tipo.estiloMusical = tipo.estiloMusical.toUpperCase()
           return tipo
         })
       })
     )
   }
 
-  create(tipo: Tipo): Observable<Tipo>{
+  create(tipo: TipoMusica): Observable<TipoMusica>{
     return this.http
            .post(this.urlEndPoint,tipo)
            .pipe(
-            map((response: any)=>response.tipo as Tipo),
+            map((response: any)=>response.tipo as TipoMusica),
             catchError((e)=>{
               if(e.status === 400){
                 return throwError(e);
@@ -44,9 +44,9 @@ export class TiposService {
            )
   }
 //lo que esta dentro de get<Tipo> tipo de dato esperado como respuesta
-  getTipo(id: any):Observable<Tipo>{
+  getTipo(id: any):Observable<TipoMusica>{
     return this.http
-        .get<Tipo>(`${this.urlEndPoint}/${id}`)
+        .get<TipoMusica>(`${this.urlEndPoint}/${id}`)
         .pipe(
           catchError((e)=>{
             if(e.status != 401 && e.error.mensaje){
@@ -58,7 +58,7 @@ export class TiposService {
         );
   }
 
-  update(tipo: Tipo): Observable<any>{
+  update(tipo: TipoMusica): Observable<any>{
     return this.http
        .put<any>(`${this.urlEndPoint}/${tipo.id}`,tipo)
        .pipe(
@@ -75,9 +75,9 @@ export class TiposService {
        )
   }
 
-  delete(id: number):Observable<Tipo>{
+  delete(id: number):Observable<TipoMusica>{
     return this.http
-        .delete<Tipo>(`${this.urlEndPoint}/${id}`)
+        .delete<TipoMusica>(`${this.urlEndPoint}/${id}`)
         .pipe(
           catchError((e)=>{
             if(e.error.mensaje){

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { Tipo } from '../components/tipo-musical/Tipo';
+import { TipoMusica } from '../components/tipo-musical/TipoMusica';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Usuario } from '../components/usuarios/Usuario';
 
@@ -15,8 +15,8 @@ export class UsuariosService {
     private router: Router)
     { }
 
-    getTipo():Observable<Tipo[]>{
-      return this.http.get<Tipo[]>(this.urlEndPoint + "/estilos").pipe(
+    getTipo():Observable<TipoMusica[]>{
+      return this.http.get<TipoMusica[]>(this.urlEndPoint + "/estilos").pipe(
         catchError(e =>{
           return throwError(e)
         })
@@ -32,10 +32,24 @@ export class UsuariosService {
     getUsuarios(page: number):Observable<any>{
           /*se hace un cast porque devuelve un observable de usuarios*/
         return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
-            // se transforma a usuarios
+          tap((response: any) => {
+            // tomamos las respuesta y se la asignamos a la variable gastos
+            // console.log('GastoService: tap 1');
+            (response.content as Usuario[]).forEach((usuario) => {
+              // se mostrara los datos de cada gasto
+              console.log(usuario.id);
+              console.log(usuario.mail);
+              console.log(usuario.tipoMusica.estiloMusical);
+              // console.log(gasto.valor);
+              // console.log(gasto.tipo);
+            });
+          }),
+
+
+          // se transforma a usuarios
             map((response:any) =>{
               (response.content as Usuario[]).map((usuario)=>{
-                usuario.tipo.tipo = usuario.tipo.tipo.toUpperCase()
+                usuario.tipoMusica.estiloMusical= usuario.tipoMusica.estiloMusical.toUpperCase()
                 return usuario
               });
               return response

@@ -1,7 +1,7 @@
-import { Tipo } from '../tipo-musical/Tipo';
+import {  TipoMusica } from '../tipo-musical/TipoMusica';
 export class Usuario {
 
   id: number = 0;
   mail: string = '';
-  tipo!: Tipo;
+  tipoMusica: TipoMusica = new TipoMusica;
 }
