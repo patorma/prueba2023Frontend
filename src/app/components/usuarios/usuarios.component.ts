@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from './Usuario';
 import { UsuariosService } from '../../services/usuarios.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegistroService } from 'src/app/services/registro.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,17 +13,21 @@ export class UsuariosComponent implements OnInit {
 
   usuarios: Usuario[] =[];
   paginador: any;
+  arreglo : any[] =[];
+  repetidos : any[] =[];
   //usuarioSeleccionado: Usuario
 
   cantidad: any;
   constructor(
    private usuarioService: UsuariosService,
    private activatedRoute: ActivatedRoute,
-   private router: Router
+   private router: Router,
+   private registroService: RegistroService
 
   ) { }
 
   ngOnInit(): void {
+
     this.activatedRoute.paramMap.subscribe((params:any)=>{
 
         let page: number = +params.get('page');
@@ -41,12 +46,17 @@ export class UsuariosComponent implements OnInit {
             (response:any) => {
               this.usuarios = response.content as Usuario[]
               this.paginador = response;
+
             }
           )
     }),
-    this.usuarioService.getCantidad().subscribe((result)=>{
+    this.usuarioService.getCantidad().subscribe((result:any)=>{
       this.cantidad = result
     })
+
+
+
   }
+
 
 }

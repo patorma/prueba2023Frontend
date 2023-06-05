@@ -1,0 +1,24 @@
+<div class="card border-primary tarjeta mb-3 panel">
+  <div class="card-header">Resultados de preferencias de usuarios</div>
+  <div class="card-body text-primary">
+    <h4 class="card-title">Listado de gustos musicales de las personas </h4>
+    <div *ngIf="resultados.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-sm table-md" *ngIf="resultados.length > 0">
+        <thead>
+          <tr>
+            <th>Número de gente por gusto musical</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let resultado of resultados">
+              <td> {{resultado}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

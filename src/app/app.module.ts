@@ -11,6 +11,8 @@ import { PaginatorUsuarioComponent } from './components/paginator-usuario/pagina
 import { PaginatorEstilosComponent } from './components/paginator-estilos/paginator-estilos.component';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './components/usuarios/form/form.component';
+import { ResultadosComponent } from './components/resultados/resultados.component';
+import { AcercaComponent } from './components/acerca/acerca.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FormComponent } from './components/usuarios/form/form.component';
     FooterComponent,
     PaginatorUsuarioComponent,
     PaginatorEstilosComponent,
-    FormComponent
+    FormComponent,
+    ResultadosComponent,
+    AcercaComponent
   ],
   imports: [
     BrowserModule,
